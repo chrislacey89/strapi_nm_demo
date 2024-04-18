@@ -51,7 +51,11 @@ async function getRestaurants(): Promise<StrapiResponse | undefined> {
 }
 async function getCardCollections(): Promise<StrapiResponse | undefined> {
   try {
-    const response = await fetch(`${BASE_URL}card-collections/1/?populate=*`);
+    const response = await fetch(`${BASE_URL}card-collections/1/?populate=*`, {
+      headers: {
+        "Cache-Control": "no-store",
+      },
+    });
     const data = await response.json();
     if (response.status !== 200) {
       throw new Error(data.message);
