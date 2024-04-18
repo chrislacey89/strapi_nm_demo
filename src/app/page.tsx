@@ -12,6 +12,7 @@ import { Eye } from "lucide-react";
 
 export default async function Home() {
   const response = await getCardCollections();
+  console.log("🚀  response:", response);
   if (!response) {
     return <div>Loading...</div>;
   }
@@ -19,7 +20,7 @@ export default async function Home() {
   const attributes = response.data.attributes;
   const { sectionTitle, sectionDescription } = attributes;
 
-  const cards = attributes.card;
+  const cards = attributes.cards;
   return (
     <main className=' p-24'>
       <Card className='flex flex-col p-8'>
