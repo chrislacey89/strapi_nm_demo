@@ -64,7 +64,7 @@ async function getCardCollections(): Promise<StrapiResponse | undefined> {
 function CardRepeater({ cards }: { cards: CardType[] }) {
   return (
     <div className='grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4'>
-      {cards.map((card) => (
+      {cards?.map((card) => (
         <Card key={card.id}>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2 gap-3'>
             <CardTitle className='text-sm font-medium'>{card.title}</CardTitle>
