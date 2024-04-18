@@ -19,7 +19,7 @@ export default async function Home() {
   const attributes = response.data.attributes;
   const { sectionTitle, sectionDescription } = attributes;
 
-  const cards = attributes.Card;
+  const cards = attributes.card;
   return (
     <main className=' p-24'>
       <Card className='flex flex-col p-8'>
