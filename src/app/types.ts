@@ -14,7 +14,7 @@ export interface Attributes {
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
-  Card: Card[];
+  card: Card[];
 }
 
 export interface Card {
