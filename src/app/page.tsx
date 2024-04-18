@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 
 import { Eye } from "lucide-react";
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const response = await getCardCollections();
