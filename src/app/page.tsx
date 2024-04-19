@@ -59,7 +59,7 @@ function CardRepeater({ cards }: { cards: CardType[] }) {
   return (
     <div className='grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4'>
       {cards?.map((card) => (
-        <Card key={card.id} className='flex flex-col justify-between'>
+        <Card key={card.id} className='flex flex-col'>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2 gap-3'>
             <CardTitle className='text-sm font-medium'>{card.title}</CardTitle>
             <div className='flex gap-2'>
@@ -82,7 +82,9 @@ function CardRepeater({ cards }: { cards: CardType[] }) {
               ))}
             </div>
           </CardContent>
-          <CardFooter>{new Date(card.date).toLocaleDateString()}</CardFooter>
+          <CardFooter className='mt-auto'>
+            {new Date(card.date).toLocaleDateString()}
+          </CardFooter>
         </Card>
       ))}
     </div>
