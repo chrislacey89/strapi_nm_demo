@@ -1,36 +1,34 @@
 export interface StrapiResponse {
-  data: Datum;
+  data: Data;
   meta: Meta;
 }
 
-export interface Datum {
-  id: number;
+export interface Data {
   attributes: Attributes;
+  id: number;
 }
 
 export interface Attributes {
-  sectionTitle: string;
-  sectionDescription: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
   cards: Card[];
+  createdAt: Date;
+  publishedAt: Date;
+  sectionDescription: string;
+  sectionTitle: string;
+  updatedAt: Date;
 }
 
 export interface Card {
+  date: Date;
+  description: string;
   id: number;
+  link: Link[];
   title: string;
-  description?: string;
-  date: string;
 }
 
-export interface Meta {
-  pagination: Pagination;
+export interface Link {
+  id: number;
+  linkText: string;
+  linkUrl: string;
 }
 
-export interface Pagination {
-  page: number;
-  pageSize: number;
-  pageCount: number;
-  total: number;
-}
+export interface Meta {}

@@ -13,7 +13,6 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const response = await getCardCollections();
-  console.log("🚀  response:", response);
   if (!response) {
     return <div>Loading...</div>;
   }
@@ -38,25 +37,13 @@ export default async function Home() {
 }
 
 const BASE_URL = "https://genuine-strength-1abe72c651.strapiapp.com/api/";
-async function getRestaurants(): Promise<StrapiResponse | undefined> {
-  try {
-    const response = await fetch(`${BASE_URL}restaurants`);
-    const data = await response.json();
-    if (response.status !== 200) {
-      throw new Error(data.message);
-    }
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-}
+const fullURL =
+  "https://genuine-strength-1abe72c651.strapiapp.com/api/card-collections/1/?populate[0]=cards&populate[1]=cards.link";
 async function getCardCollections(): Promise<StrapiResponse | undefined> {
   try {
-    const response = await fetch(`${BASE_URL}card-collections/1/?populate=*`, {
-      headers: {
-        "Cache-Control": "no-store",
-      },
-    });
+    // const response = await
+    // fetch(`${BASE_URL}card-collections/1/?populate=*`);
+    const response = await fetch(fullURL);
     const data = await response.json();
     if (response.status !== 200) {
       throw new Error(data.message);
@@ -68,10 +55,11 @@ async function getCardCollections(): Promise<StrapiResponse | undefined> {
 }
 
 function CardRepeater({ cards }: { cards: CardType[] }) {
+  console.log("🚀  cards:", cards[0].link);
   return (
     <div className='grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4'>
       {cards?.map((card) => (
-        <Card key={card.id}>
+        <Card key={card.id} className='flex flex-col justify-between'>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2 gap-3'>
             <CardTitle className='text-sm font-medium'>{card.title}</CardTitle>
             <div className='flex gap-2'>
@@ -83,6 +71,16 @@ function CardRepeater({ cards }: { cards: CardType[] }) {
           </CardHeader>
           <CardContent>
             <CardDescription>{card.description}</CardDescription>
+            <div className='flex flex-col gap-5 mt-6'>
+              {card.link?.map((link) => (
+                <a
+                  key={link.id}
+                  href={link.linkUrl}
+                  className='text-sm text-purple-600 underline'>
+                  {link.linkText}
+                </a>
+              ))}
+            </div>
           </CardContent>
           <CardFooter>{new Date(card.date).toLocaleDateString()}</CardFooter>
         </Card>
